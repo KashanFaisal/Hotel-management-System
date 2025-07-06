@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+
+<style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  * {box-sizing: border-box;}
+  
+  /* Set a style for all buttons */
+  .button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9
+  }
+  
+  
+  .button:hover {
+    opacity:1;
+  }
+  
+  /* Float cancel and delete buttons and add an equal width */
+  .cancelbtn, .deletebtn {
+    float: center;
+    width: 20%;
+  }
+  
+  /* Add a color to the cancel button */
+  .cancelbtn {
+    background-color: #ccc;
+    color: black;
+  }
+  
+  /* Add a color to the delete button */
+  .deletebtn {
+    background-color: #f44336;
+  }
+  
+  /* Add padding and center-align text to the container */
+  .container {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    left:35%;
+    top: 30%;
+    width: 35%; /* Full width */
+    height: 38%; /* Full height */
+   
+    background-color: #171622de;
+    
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    border: 1px solid #888;
+    width: 100%;
+    height: 100%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 15px;
+  }
+   
+  /* The Modal Close Button (x) */
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
+  }
+  
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Change styles for cancel button and delete button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn, .deletebtn {
+       width: 100%;
+    }
+  }
+  </style>
+
+<!-- Mirrored from kamr.dexignlab.com/xhtml/table-bootstrap-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:37:25 GMT -->
+ 
+
+<body>
+
+    {% include "loader.html" %} 
+	
+	<div id="main-wrapper">
+		{% include "navebar.html" %} 
+		{% include "sidebar.html" %} 
+
+    
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Feedback</a></li>
+					</ol>
+                </div>
+                <!-- row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Feedback View</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:80px;"><strong>#</strong></th>
+                                                <th><strong>Name</strong></th>
+                                                <th><strong>Room</strong></th>
+                                                <th><strong>Feedback</strong></th>
+                                                <th><strong>Rating</strong></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for feedback in feedback %}
+                                            <tr>
+                                                <td><strong>{{feedback.id}}</strong></td>
+                                                <td><strong>{{feedback.username}}</strong></td>
+                                                <td>{{feedback.r_id.r_cat.rc_name}}</td>
+                                                <td>{{feedback.message}}</td>
+                                                <td>{{feedback.rating}}</td>
+                                                
+                                                <td>
+                                                  <div class="dropdown">
+                                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
+                                                      <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                    {%if feedback.feedback_status == 'False'%}
+                                                      <a class="dropdown-item" href="/feedback_permission/{{feedback.id}}">Enable</a>
+                                                    {% else %}  
+                                                      <a class="dropdown-item" href="/feedback_permission/{{feedback.id}}">Disbale</a>
+                                                    {% endif %}
+                                                      <a class="dropdown-item" onclick="document.getElementById('id01_{{feedback.id}}').style.display='block'" href="#">Delete</a>
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                                <div id="id01_{{feedback.id}}" class="modal">
+                                                  <div id="id01" class="container">
+                                                    <span onclick="document.getElementById('id01_{{feedback.id}}').style.display='none'" class="close" title="Close Modal">×</span>
+                                                    <h1>Delete Record</h1>
+                                                    <p>Are you sure you want to delete?</p>
+                                                    <div class="clearfix">
+                                                      <button type="button" onclick="document.getElementById('id01_{{feedback.id}}').style.display='none'" class="cancelbtn button">Cancel</button>
+                                                      <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button> -->
+                                                      <a onclick="document.getElementById('id01_{{feedback.id}}').style.display='none'" class="deletebtn button" href="/feedback_delete/{{feedback.id}}">Delete</a>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </tr>
+                                            
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+          
+          
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+  {% include 'footer.html'%} 
+  
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+</body>
+
+<!-- Mirrored from kamr.dexignlab.com/xhtml/table-bootstrap-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:37:25 GMT -->
+</html>

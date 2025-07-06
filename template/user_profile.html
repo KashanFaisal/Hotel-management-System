@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'user_header.html'%}
+    <style>
+        .profile {
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            
+        }
+    
+        .sec {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #c5a880;
+        }
+    
+        .edit{
+          border-radius: 20%;
+          
+          
+        }
+    </style>
+
+<body>
+    {% include 'user_navebar.html' %}
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_3.jpg');">
+        <div class="overlay"></div>
+          <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+              <div class="col-md-9 pt-5 text-center">
+                <p class="breadcrumbs"><span class="me-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Profile <i class="fa fa-chevron-right"></i></span></p>
+                <h1 class="mb-0 bread">Profile</h1>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section class="sec">
+        <header class="profile">
+          <div class="row">
+            <div class="col-md-3">
+              <h3>Profile</h3>
+            </div>
+            <div class="col-md-9 d-flex justify-content-between">
+              <a href="/u_profile_edit/{{user.username}}" style="margin-left: auto;" ><p class="btn btn-primary edit">Edit</p></a>
+            </div>
+          </div>
+        </header>
+          <div class="container">
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>UserName:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.username}}</h4>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>Name:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.first_name}}</h4>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>Email:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.email}}</h4>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>Phone#:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.phone_number}}</h4>
+              </div>
+            </div>
+          </div>
+      
+      </section>
+</body>
+</html>

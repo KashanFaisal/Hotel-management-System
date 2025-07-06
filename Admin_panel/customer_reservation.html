@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "header.html" %}
+ 
+  <body>
+    {% include 'loader.html'%}
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+      {% include "navebar.html" %} {% include "sidebar.html" %}
+
+      <!--**********************************
+            Content body start
+        ***********************************-->
+      <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+          <div
+            class="d-block d-lg-flex align-items-center justify-content-between mb-5"
+          >
+            <div class="coin-tabs">
+              <ul
+                class="nav nav-tabs d-none"
+                id="ListViewTabLink"
+                role="tablist"
+              >
+              </ul>
+            </div>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list" aria-labelledby="list-tab" >
+              <div class="tab-content" id="ListViewTabLinkContent"> 
+                <div class="tab-pane fade active show" id="all-status" aria-labelledby="boxed-all-status-tab">
+                  <div class="table-responsive card">
+                    <div class="table-responsive">
+                      <table
+                        class="table border-0 display mb-4 dataTablesCard booking-table table-responsive-lg"
+                        id="guestTable-all6"
+                      >
+                        <thead>
+                          <tr>
+                            <th>Room Info</th>
+                            <th>Customer</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
+                            <th>Status</th>
+                            <th>Book Date</th>
+                            <th class="bg-none"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for reserve in reserve %}
+                          <tr>
+                            <td>
+                              <div class="guest-bx">
+                                <img
+                                  class="me-4"
+                                  src="{{reserve.r_id.room_img.url}}"
+                                  alt=""
+                                />
+                                <div>
+                                  <span class="text-primary fs-16 font-w400 text-nowrap" >{{reserve.r_id.r_no}}</span>
+                                  <br />
+                                  <span class="fs-15 font-w500 text-nowrap">Floor G-05</span>
+                                  <h4 class="mb-0 mt-1 fs-18 font-w500 text-nowrap" >
+                                    <a class="text-black" href="javascript:void(0);" >{{reserve.r_id.r_cat.rc_name}}</a>
+                                  </h4>
+                                  <span class="fs-15 font-w500 text-nowrap">{{reserve.r_id.r_cat.rc_des}}</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div>
+                                <span class="fs-15 font-w500 text-nowrap" >{{reserve.username}}</span >
+                              </div>
+                            </td>
+                           
+                            <td>
+                              <div>
+                                <span class="fs-15 font-w500 text-nowrap"
+                                  >{{reserve.check_in_date}}</span
+                                >
+                              </div>
+                            </td>
+                            <td>
+                              <div>
+                                <span class="fs-15 font-w500 text-nowrap"
+                                  >{{reserve.check_out_date}}</span
+                                >
+                              </div>
+                            </td>
+                            <td>
+                              {% if reserve.res_status == 'Booked'%}
+                              <div>
+                                <span 
+                                  >Reserve</span
+                                >
+                              </div>
+                              {% endif %}
+                              {% if reserve.res_status == 'Disabled'%}
+                              <div>
+                                <span 
+                                  >Pending</span
+                                >
+                              </div>
+                              {% endif %}
+                            </td>
+                            <td>
+                              {% if reserve.res_status == 'Disabled'%}    
+                              <div style="padding-bottom:5px ;">
+                                  <a href="/customer_reservation_approved/{{reserve.id}}">
+                                      <span class="btn btn-success btn-sm">Booked</span>
+                                  </a>
+                              </div>
+                              <div>
+                                <a href="/customer_reservation_reject/{{reserve.id}}" >
+                                  <span class="btn btn-danger btn-sm"> Reject </span>
+                                </a>
+                              </div>
+                              {% endif %}
+                              {% if reserve.res_status == 'Booked'%}
+                              <div>
+                                  <a href="/check_out/{{reserve.id}}">
+                                      <span class="btn btn-primary btn-sm">Check Out</span>
+                                  </a>
+                              </div>
+                              {% endif %}
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--**********************************
+            Content body end
+        ***********************************-->
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    {% include "footer.html" %}
+    <script>
+      function assignedDoctor() {
+        /*  testimonial one function by = owl.carousel.js */
+        jQuery(".front-view-slider").owlCarousel({
+          loop: true,
+          margin: 30,
+          nav: true,
+          center: true,
+          autoplaySpeed: 3000,
+          navSpeed: 3000,
+          paginationSpeed: 3000,
+          slideSpeed: 3000,
+          smartSpeed: 3000,
+          autoplay: false,
+          animateOut: "fadeOut",
+          dots: true,
+          navText: ["", ""],
+          responsive: {
+            0: {
+              items: 1,
+            },
+
+            480: {
+              items: 1,
+            },
+
+            767: {
+              items: 5,
+            },
+            1400: {
+              items: 5,
+            },
+            1750: {
+              items: 5,
+            },
+          },
+        });
+      }
+
+      jQuery(window).on("load", function () {
+        setTimeout(function () {
+          assignedDoctor();
+        }, 1000);
+      });
+    </script>
+  </body>
+
+  <!-- Mirrored from kamr.dexignlab.com/xhtml/room.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:36:47 GMT -->
+</html>

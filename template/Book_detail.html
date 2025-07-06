@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="vendor/chartist/css/chartist.min.css">
+	<link href="/static/admin_static/vendor/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="/static/admin_static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="/static/admin_static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="/static/admin_static/css/style.css" rel="stylesheet">
+    {% include 'user_header.html'%}
+    <style>
+        .profile {
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            
+        }
+    
+        .sec {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #c5a880;
+        }
+    
+        .edit{
+          border-radius: 20%;
+          
+          
+        }
+    </style>
+
+<body>
+    {% include 'user_navebar.html' %}
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_3.jpg');height: 250px;">
+        <div class="overlay"></div>
+          <div class="container" >
+            <div class="row no-gutters slider-text align-items-top justify-content-center">
+              <div class="col-md-9 pt-5 text-center" style="margin-top: 65px;">
+                <p class="breadcrumbs"><span class="me-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Profile <i class="fa fa-chevron-right"></i></span></p>
+                <h1 class="mb-0 bread">Profile</h1>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section class="sec">
+        <!-- <header class="profile">
+          <!-- <div class="row">
+            <div class="col-md-3">
+              <h3>Profile</h3>
+            </div>
+            <div class="col-md-9 d-flex justify-content-between">
+              <a href="/u_profile_edit/{{user.username}}" style="margin-left: auto;" ><p class="btn btn-primary edit">Edit</p></a>
+            </div>
+          </div> 
+        </header> -->
+        <div class="col-xl-12 col-xxl-12 col-lg-12">
+            <div class="">
+                <div class="card-header border-0 pb-0">
+                    <h4 class="card-title">Reservation</h4>
+                </div>
+                <div class="card-body">
+                    <div id="DZ_W_TimeLine" class="widget-timeline dz-scroll height370">
+                        <ul class="timeline">
+                            <li>
+                              {% for d in detail%}
+                                <div class="timeline-badge primary"></div>
+                                <a class="timeline-panel text-muted" href="#" id="disabledLink">
+                                    <span>10 minutes ago</span>
+                                    <h6 class="mb-0">{{user.username}},your {{d.r_id.r_cat.rc_name}}&nbsp;reservation is confirmed.</h6>
+                                    <h6 class="mb-0" onclick="cancelReservation('{{d.id}}')">if you want to cancel reservation <strong class="text-primary">Cancel</strong></h6>
+                                </a>
+                              {% endfor %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- <div class="container">
+           
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>UserName:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.username}}</h4>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>Name:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>Kashan Faisal</h4>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>Email:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.email}}</h4>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-md-3">
+                <h5>Phone#:</h4>
+              </div>
+              <div class="col-md-4">
+                <h5>{{user.phone_number}}</h4>
+              </div>
+            </div>
+          </div> -->
+      
+      </section>
+
+      <script src="/static/admin_static/vendor/global/global.min.js"></script>
+      <script src="/static/admin_static/vendor/chart.js/Chart.bundle.min.js"></script>
+      <!-- Apex Chart -->
+      <script src="/static/admin_static/vendor/apexchart/apexchart.js"></script>
+      
+      <!-- Chartist -->
+      <script src="/static/admin_static/vendor/chartist/js/chartist.min.js"></script>
+      <script src="/static/admin_static/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+      
+      <!-- Flot -->
+      <script src="/static/admin_static/vendor/flot/jquery.flot.js"></script>
+      <script src="/static/admin_static/vendor/flot/jquery.flot.pie.js"></script>
+      <script src="/static/admin_static/vendor/flot/jquery.flot.resize.js"></script>
+      <script src="/static/admin_static/vendor/flot-spline/jquery.flot.spline.min.js"></script>
+      
+      <!-- Chart sparkline plugin files -->
+      <script src="/static/admin_static/vendor/jquery-sparkline/jquery.sparkline.min.js"></script>
+      <script src="/static/admin_static/js/plugins-init/sparkline-init.js"></script>
+      
+      <!-- Chart piety plugin files -->
+      <script src="/static/admin_static/vendor/peity/jquery.peity.min.js"></script>
+      <script src="/static/admin_static/js/plugins-init/piety-init.js"></script>
+      
+      <!-- Init file -->
+      <script src="/static/admin_static/js/plugins-init/widgets-script-init.js"></script>
+  
+      <script src="/static/admin_static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+      
+      <script src="/static/admin_static/js/custom.min.js"></script>
+      <script src="/static/admin_static/js/deznav-init.js"></script>
+      <script src="/static/admin_static/js/demo.js"></script>
+      <script src="/static/admin_static/js/styleSwitcher.js"></script>
+      <script src="/static/admin_static/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
+      <script>
+        function cancelReservation(reservationId) {
+            // Construct the URL for canceling the reservation
+            var cancelUrl = "/reservation_cancel/" + reservationId;
+    
+            // Redirect to the cancel reservation page
+            window.location.href = cancelUrl;
+        }
+    </script>
+    <script>
+      document.getElementById("disabledLink").addEventListener("click", function(event) {
+          // Prevent the default action (e.g., navigating to the href)
+          event.preventDefault();
+          
+          // You can add additional logic here if needed
+      });
+  </script>
+</body>
+</html>

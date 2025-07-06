@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from preview.colorlib.com/theme/unwind/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 18:04:01 GMT -->
+{% include 'user_header.html'%}
+<body>
+{% include 'user_navebar.html'%}
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_3.jpg');">
+<div class="overlay"></div>
+<div class="container">
+<div class="row no-gutters slider-text align-items-center justify-content-center">
+<div class="col-md-9 pt-5 text-center">
+<p class="breadcrumbs"><span class="me-2"><a href="{% url 'home'%}">Home <i class="fa fa-chevron-right"></i></a></span> <span>Contact <i class="fa fa-chevron-right"></i></span></p>
+<h1 class="mb-0 bread">Contact us</h1>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row no-gutters justify-content-center">
+      <div class="col-md-12">
+        <div class="wrapper">
+          <div class="row g-0">
+            <div class="col-lg-12">
+              <div class="contact-wrap w-100 p-md-5 p-4">
+                <h3>Contact us</h3>
+                <p class="mb-4">We're open for any suggestion or just to have a chat</p>
+                <div class="row mb-4">
+                  <div class="col-md-4">
+                    <div class="dbox w-100 d-flex align-items-start">
+                      <div class="text">
+                      <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="dbox w-100 d-flex align-items-start">
+                      <div class="text">
+                      <p><span>Email:</span> <a href="mailto:kashan.faisal2001@gmai.com"><span class="__cf_email__" data-cfemail="365f585059764f594344455f42531855595b">kashan.faisal2001@gmail.com</span></a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="dbox w-100 d-flex align-items-start">
+                      <div class="text">
+                      <p><span>Phone:</span> <a href="tel://03491832757">+ 9249 1832757</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <form method="POST" class="contactForm">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-12" >
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="name" id="name" placeholder="Name" style="font-weight: 1000;" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input type="email" class="form-control" name="email" id="email" placeholder="Email" style="font-weight: 1000;" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" style="font-weight: 1000;" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Create a message here" style="font-weight: 1000;"required ></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input type="submit" value="submit" class="btn btn-primary">
+                        <div class="submitting"></div>
+                      </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="w-100 social-media mt-5">
+                <h3>Follow us here</h3>
+                <p>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">Dribbble</a>
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{% include 'user_footer.html'%}
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"8588aacb797921ec","b":1,"version":"2024.2.1","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script> 
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/unwind/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 18:04:01 GMT -->
+</html>

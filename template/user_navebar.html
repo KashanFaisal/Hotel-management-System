@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg  ftco-navbar-light" >
+    <div class="container-xl">
+        <a class="navbar-brand align-items-center" href="index.html">
+            <span class>Sun City<small>Hotel Booking</small></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link {% if request.path == '/home/' %}active{% endif %}" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about'%}">About</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == '/room/' %}active{% endif %}" href="{% url 'room' %}">Rooms</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == '/contact_us/' %}active{% endif %}" href="{% url 'contact_us' %}">Contact</a></li>
+                {% if not request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'customer_register' %}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'customer_login' %}">Login</a></li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="/static/images/img_avatar.png" alt="Avatar" class="avatar" style=" margin-top:-15px;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'u_profile' %}">Profile</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'booked_detail' %}">Book Detail</a>
+                    </div>
+                  </li>
+                  {% endif %}
+            </ul>
+        
+        </div>
+    </div>
+</nav>

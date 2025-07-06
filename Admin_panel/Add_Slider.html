@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html"%}
+<style>
+    #img-preview {
+        display: none;
+        width: 155px;
+        border: 2px dashed #333;  
+        margin-bottom: 20px;
+      }
+      #img-preview img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      [type="file"] {
+        height: 0;  
+        width: 0;
+        overflow: hidden;
+      }
+      [type="file"] + label {
+        font-family: sans-serif;
+        background: #c5a880;
+        padding: 10px 30px;
+        border: 2px solid #c5a880;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      [type="file"] + label:hover {
+        background-color: #e0b87e;
+        color: #fff;
+      }
+      
+      /* -------------------------------------*/
+      body {padding: 15px;}
+      p {position:fixed; bottom:0; font-family: monospace; font-weight: bold; font-size:12px;}
+      p a {color:#000;}
+      .img{
+        margin-right: 80%!important;
+      }
+
+      
+</style>
+
+<body>
+
+    {% include "loader.html" %} 
+	
+	<div id="main-wrapper">
+		{% include "navebar.html" %} 
+		{% include "sidebar.html" %} 
+
+
+      <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" style="content: Sun City Cottages;"><a href="java:void(0)">Form</a></li>
+						<li class="breadcrumb-item "><a href="java:void(0)">New Room </a></li>
+					</ol>
+                </div>
+                <!-- row -->
+                <div class="row" >
+                    <center>
+                    <div class="col-xl-11 col-lg-11">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add New Room</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <input type="text" name="slider_status" id="r_no" class="form-control input-default text_box" value="disable" hidden >
+                                        </div>
+                                        <div class="mb-3 img">
+                                            <div id="img-preview"></div>
+                                            <input type="file" id="choose-file" name="image" accept="image/*" />
+                                            <label for="choose-file">Choose File</label>
+                                        
+                                        </div>
+                                        <div class="mb-3 d-flex justify-content-between">
+                                            <button type="submit" class="btn btn-primary" style="width: 100%; font-size:18px; font-weight:700" >Submit</button>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        {% include "footer.html"%}
+
+        <script>
+            const chooseFile = document.getElementById("choose-file");
+            const imgPreview = document.getElementById("img-preview");
+
+            chooseFile.addEventListener("change", function () {
+            getImgData();
+            });
+
+            function getImgData() {
+            const files = chooseFile.files[0];
+            if (files) {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(files);
+                fileReader.addEventListener("load", function () {
+                imgPreview.style.display = "block";
+                imgPreview.innerHTML = '<img src="' + this.result + '" />';
+                });    
+            }
+            }
+        </script>
+        
+</body>
+</html>

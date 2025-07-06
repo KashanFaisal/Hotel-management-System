@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "header.html" %}
+  <style>
+    .fixed-width {
+      width: 20px; /* Adjust the width value as needed */
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    .button {
+      background-color: #04aa6d;
+      color: white;
+      padding: 10px 15px;
+      margin: 8px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    .button:hover {
+      opacity: 1;
+    }
+
+    /* Float cancel and delete buttons and add an equal width */
+    .cancelbtn,
+    .deletebtn {
+      float: center;
+      width: 20%;
+    }
+
+    /* Add a color to the cancel button */
+    .cancelbtn {
+      background-color: #ccc;
+      color: black;
+    }
+
+    /* Add a color to the delete button */
+    .deletebtn {
+      background-color: #f44336;
+    }
+
+    /* Add padding and center-align text to the container */
+    .container {
+      padding: 16px;
+      text-align: center;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      left: 35%;
+      top: 30%;
+      width: 35%; /* Full width */
+      height: 38%; /* Full height */
+
+      background-color: black;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      border: 1px solid #888;
+      width: 100%;
+      height: 100%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 15px;
+    }
+
+    /* The Modal Close Button (x) */
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 5px;
+      font-size: 35px;
+      font-weight: bold;
+      color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #f44336;
+      cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    /* Change styles for cancel button and delete button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .cancelbtn,
+      .deletebtn {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <body>
+    {% include 'loader.html'%}
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+      {% include "navebar.html" %} {% include "sidebar.html" %}
+
+      <!--**********************************
+            Content body start
+        ***********************************-->
+      <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+          <div
+            class="d-block d-lg-flex align-items-center justify-content-between mb-5"
+          >
+            <div class="coin-tabs">
+              <ul
+                class="nav nav-tabs d-none"
+                id="ListViewTabLink"
+                role="tablist"
+              >
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="all-status-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#all-status"
+                    type="button"
+                    role="tab"
+                    aria-controls="all-status"
+                    aria-selected="true"
+                  >
+                    All Status
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="available-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#available"
+                    type="button"
+                    role="tab"
+                    aria-controls="available"
+                    aria-selected="false"
+                  >
+                    Available
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="soldout-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#soldout"
+                    type="button"
+                    role="tab"
+                    aria-controls="soldout"
+                    aria-selected="false"
+                  >
+                    Soldout
+                  </button>
+                </li>
+              </ul>
+
+              <ul class="nav nav-tabs" id="BoxedViewTabLink" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="boxed-all-status-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#boxed-all-status"
+                    type="button"
+                    role="tab"
+                    aria-controls="boxed-all-status"
+                    aria-selected="true"
+                  >
+                    All Status
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="boxed-available-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#boxed-available"
+                    type="button"
+                    role="tab"
+                    aria-controls="boxed-available"
+                    aria-selected="false"
+                  >
+                    Available
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="boxed-soldout-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#boxed-soldout"
+                    type="button"
+                    role="tab"
+                    aria-controls="boxed-soldout"
+                    aria-selected="false"
+                  >
+                    Soldout
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="form-head d-inline-block d-sm-flex align-items-center mt-2 mt-lg-0"
+            >
+              <select class="form-control default-select style-1 border w-auto">
+                <option>Sort by Newest</option>
+                <option>Oldest</option>
+                <option>Newest</option>
+              </select>
+              <ul
+                class="grid-tabs nav nav-tabs border-0"
+                id="nav-tab"
+                role="tablist"
+              >
+                <li class="nav-item">
+                  <button
+                    class="nav-link active"
+                    id="list-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#list"
+                    type="button"
+                    role="tab"
+                    aria-controls="list"
+                    aria-selected="false"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M21.7908 3.01252H8.23302C7.01521 3.01252 6.02441 4.00331 6.02441 5.22263C6.02441 6.44044 7.01521 7.43123 8.23302 7.43123H21.7908C23.0086 7.43123 23.9994 6.44044 23.9994 5.22263C23.9994 4.00327 23.0086 3.01252 21.7908 3.01252Z"
+                        fill="#C1C1C1"
+                      />
+                      <path
+                        d="M2.20941 3.01252C0.991172 3.01252 0 4.00364 0 5.22188C0 6.44011 0.991172 7.43123 2.20941 7.43123C3.42764 7.43123 4.41877 6.44011 4.41877 5.22188C4.41877 4.00364 3.42764 3.01252 2.20941 3.01252Z"
+                        fill="#C1C1C1"
+                      />
+                      <path
+                        d="M2.20941 9.79064C0.991172 9.79064 0 10.7818 0 12C0 13.2182 0.991172 14.2094 2.20941 14.2094C3.42764 14.2094 4.41877 13.2182 4.41877 12C4.41877 10.7818 3.42764 9.79064 2.20941 9.79064Z"
+                        fill="#C1C1C1"
+                      />
+                      <path
+                        d="M2.20941 16.5688C0.991172 16.5688 0 17.5599 0 18.7781C0 19.9964 0.991172 20.9875 2.20941 20.9875C3.42764 20.9875 4.41877 19.9964 4.41877 18.7781C4.41877 17.5599 3.42764 16.5688 2.20941 16.5688Z"
+                        fill="#C1C1C1"
+                      />
+                      <path
+                        d="M21.7908 9.79064H8.23302C7.01521 9.79064 6.02441 10.7814 6.02441 12.0007C6.02441 13.2186 7.01521 14.2094 8.23302 14.2094H21.7908C23.0086 14.2094 23.9994 13.2186 23.9994 12.0007C23.9994 10.7814 23.0086 9.79064 21.7908 9.79064Z"
+                        fill="#C1C1C1"
+                      />
+                      <path
+                        d="M21.7908 16.5688H8.23302C7.01521 16.5688 6.02441 17.5596 6.02441 18.7789C6.02441 19.9967 7.01521 20.9875 8.23302 20.9875H21.7908C23.0086 20.9875 23.9994 19.9967 23.9994 18.7789C23.9994 17.5596 23.0086 16.5688 21.7908 16.5688Z"
+                        fill="#C1C1C1"
+                      />
+                    </svg>
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button
+                    class="nav-link"
+                    id="boxed-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#boxed"
+                    type="button"
+                    role="tab"
+                    aria-controls="boxed"
+                    aria-selected="false"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 1H4C2.34315 1 1 2.34315 1 4V8C1 9.65685 2.34315 11 4 11H8C9.65685 11 11 9.65685 11 8V4C11 2.34315 9.65685 1 8 1Z"
+                        fill="#F66F4D"
+                      />
+                      <path
+                        d="M20 1H16C14.3431 1 13 2.34315 13 4V8C13 9.65685 14.3431 11 16 11H20C21.6569 11 23 9.65685 23 8V4C23 2.34315 21.6569 1 20 1Z"
+                        fill="#F66F4D"
+                      />
+                      <path
+                        d="M8 13H4C2.34315 13 1 14.3431 1 16V20C1 21.6569 2.34315 23 4 23H8C9.65685 23 11 21.6569 11 20V16C11 14.3431 9.65685 13 8 13Z"
+                        fill="#F66F4D"
+                      />
+                      <path
+                        d="M20 13H16C14.3431 13 13 14.3431 13 16V20C13 21.6569 14.3431 23 16 23H20C21.6569 23 23 21.6569 23 20V16C23 14.3431 21.6569 13 20 13Z"
+                        fill="#F66F4D"
+                      />
+                    </svg>
+                  </button>
+                </li>
+              </ul>
+              <a
+                href="{% url 'add_room' %}"
+                class="btn btn-primary ms-sm-3 ms-0 mt-2 mt-sm-0"
+                >Add New Room</a
+              >
+            </div>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="list"
+              aria-labelledby="list-tab"
+            >
+              <div class="tab-content" id="ListViewTabLinkContent">
+                <div
+                  class="tab-pane fade active show"
+                  id="all-status"
+                  aria-labelledby="boxed-all-status-tab"
+                >
+                  <div class="table-responsive card">
+                    <div class="table-responsive">
+                      <table
+                        class="table border-0 display mb-4 dataTablesCard booking-table table-responsive-lg"
+                        id="guestTable-all6"
+                      >
+                        <thead>
+                          <tr>
+                            <th class="bg-none">
+                              <div class="form-check style-3">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="checkAll"
+                                />
+                              </div>
+                            </th>
+                            <th>Room Name</th>
+                            <th>Bed Type</th>
+                            <th>Person</th>
+                            <th>Cost</th>
+                            
+                            
+                            <th class="bg-none"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for r_data in room_data %}
+                          <tr>
+                            <td>
+                              <div class="form-check style-3">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="guest-bx" >
+                                <img
+                                  class="me-4"
+                                  src="{{r_data.room_img.url}}"
+                                  alt=""
+                                />
+                                <div>
+                                  <span
+                                    class="text-primary fs-16 font-w400 text-nowrap"
+                                    >{{r_data.r_no}}</span
+                                  >
+                                  <br />
+                                  <!-- <span class="fs-15 font-w500 text-nowrap"
+                                    >Floor G-05</span
+                                  > -->
+                                  <h4
+                                    class="mb-0 mt-1 fs-18 font-w500 text-nowrap"
+                                  >
+                                    <a
+                                      class="text-black"
+                                      href="javascript:void(0);"
+                                      >{{r_data.r_cat.rc_name}}</a
+                                    >
+                                  </h4>
+                                  <span class="fs-15 font-w500 text-nowrap fixed-width"
+                                    >{{r_data.r_cat.rc_des}}</span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div>
+                                <span class="fs-15 font-w500 text-nowrap"
+                                  >{{r_data.r_bed_no}}</span
+                                >
+                              </div>
+                            </td>
+                           
+                            <td>
+                              <div>
+                                <span class="fs-15 font-w500 text-nowrap"
+                                  >{{r_data.r_capacity}}</span
+                                >
+                              </div>
+                            </td>
+                            <td>
+                              <div>
+                                <span class="fs-15 font-w500 text-nowrap"
+                                  >{{r_data.r_price}}Rs</span
+                                >
+                              </div>
+                            </td>
+                           
+                            
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a
+                                  href="javascript:void(0);"
+                                  class="btn-link"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                      stroke="#262626"
+                                      stroke-width="2"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                      stroke="#262626"
+                                      stroke-width="2"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                      stroke="#262626"
+                                      stroke-width="2"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                </a>
+                                <div class="dropdown-menu">
+                                  <a
+                                    class="dropdown-item"
+                                    href="/room_edit/{{r_data.id}}"
+                                    >Edit</a
+                                  >
+                                  <a
+                                    class="dropdown-item"
+                                    onclick="document.getElementById('id01_{{r_data.id}}').style.display='block'"
+                                    href="#"
+                                    >Delete</a
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <div id="id01_{{r_data.id}}" class="modal">
+                              <div id="id01" class="container">
+                                <span
+                                  onclick="document.getElementById('id01_{{r_data.id}}').style.display='none'"
+                                  class="close"
+                                  title="Close Modal"
+                                  >×</span
+                                >
+                                <h1>Delete Record</h1>
+                                <p>Are you sure you want to delete?</p>
+                                <div class="clearfix">
+                                  <button
+                                    type="button"
+                                    onclick="document.getElementById('id01_{{r_data.id}}').style.display='none'"
+                                    class="cancelbtn button"
+                                  >
+                                    Cancel
+                                  </button>
+                                  <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button> -->
+                                  <a
+                                    onclick="document.getElementById('id01_{{r_data.id}}').style.display='none'"
+                                    class="deletebtn button"
+                                    href="/room_delete/{{r_data.id}}"
+                                    >Delete</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="boxed" aria-labelledby="boxed-tab">
+              <div class="tab-content" id="BoxedViewTabLinkContent">
+                <div
+                  class="tab-pane fade active show"
+                  id="boxed-all-status"
+                  aria-labelledby="boxed-all-status-tab"
+                >
+                  <div class="row">
+                    {% for r_data in room_data %}
+                    <div class="main-grid">
+                      <div class="grid-info">
+                        <div class="popular-rooms">
+                          <div class="dropdown dropstart">
+                            <a
+                              href="javascript:void(0);"
+                              class="btn-link"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            </a>
+                            <div class="dropdown-menu">
+                              <a
+                                class="dropdown-item"
+                                href="javascript:void(0);"
+                                >Edit</a
+                              >
+                              <a
+                                class="dropdown-item"
+                                href="javascript:void(0);"
+                                >Delete</a
+                              >
+                            </div>
+                          </div>
+                          <img src="{{r_data.room_img.url}}" alt="image" />
+                          <div class="content">
+                            <span class="badge badge-success">AVAILABLE</span>
+                            <h3
+                              class="font-w500 text-white pt-3 pb-2 m-0 text-nowrap"
+                            >
+                              <a href="javascript:void(0);"
+                                >{{r_data.r_cat.rc_name}}</a
+                              >
+                            </h3>
+                            <span class="font-w400 text-white"
+                              >{{r_data.r_no}}</span
+                            >
+                          </div>
+                        </div>
+                        <div class="review-area">
+                          <div class="star-rate">
+                            <h4 class="mb-0 font-w500">3.4</h4>
+                            <ul>
+                              <li><i class="fa-solid fa-star"></i></li>
+                              <li><i class="fa-solid fa-star"></i></li>
+                              <li><i class="fa-solid fa-star"></i></li>
+                            </ul>
+                          </div>
+                          <p class="mb-0 font-w400">{{r_data.r_no}}</p>
+                        </div>
+                        <ul class="feature-list">
+                          <li>Floor <span>G-05</span></li>
+                          <li>Bed Type <span>{{r_data.r_bed_no}}</span></li>
+                          <li>Fecility <span>{{r_data.r_cat.rc_des}}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    {% endfor%}
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-between flex-wrap mt-4"
+                  >
+                    <div class="mb-sm-0 mb-3">
+                      <h5 class="mb-0" id="data-info">
+                        Showing {{ room_data|length }} of {{ total_data }} Data
+                      </h5>
+                    </div>
+                    <nav>
+                      <ul
+                        class="pagination pagination-gutter pagination-primary style-1"
+                      >
+                        <li class="page-item page-indicator job-search-page">
+                          <a class="page-link" href="javascript:void(0)"
+                            >Prev</a
+                          >
+                        </li>
+                        <li class="page-item active">
+                          <a class="page-link" href="javascript:void(0)">1</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)">2</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)">3</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)">4</a>
+                        </li>
+                        <li class="page-item page-indicator job-search-page">
+                          <a class="page-link" href="javascript:void(0)"
+                            >Next</a
+                          >
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--**********************************
+            Content body end
+        ***********************************-->
+
+      <!--**********************************
+            Footer start
+        ***********************************-->
+      <div class="footer">
+        <div class="copyright">
+          <p>
+            Copyright © Designed &amp; Developed by
+            <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2022
+          </p>
+        </div>
+      </div>
+      <!--**********************************
+            Footer end
+        ***********************************-->
+
+      <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+      <!--**********************************
+           Support ticket button end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    {% include "footer.html" %}
+    <script>
+      function assignedDoctor() {
+        /*  testimonial one function by = owl.carousel.js */
+        jQuery(".front-view-slider").owlCarousel({
+          loop: true,
+          margin: 30,
+          nav: true,
+          center: true,
+          autoplaySpeed: 3000,
+          navSpeed: 3000,
+          paginationSpeed: 3000,
+          slideSpeed: 3000,
+          smartSpeed: 3000,
+          autoplay: false,
+          animateOut: "fadeOut",
+          dots: true,
+          navText: ["", ""],
+          responsive: {
+            0: {
+              items: 1,
+            },
+
+            480: {
+              items: 1,
+            },
+
+            767: {
+              items: 5,
+            },
+            1400: {
+              items: 5,
+            },
+            1750: {
+              items: 5,
+            },
+          },
+        });
+      }
+
+      jQuery(window).on("load", function () {
+        setTimeout(function () {
+          assignedDoctor();
+        }, 1000);
+      });
+    </script>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("id01");
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+    <script>
+      // Replace these values with your actual data
+      var totalData = {{ total_records }};
+      var displayedData = {{ room_data|length }};
+
+      // Update the text dynamically
+      document.getElementById('data-info').innerText = 'Showing ' + displayedData + ' of ' + totalData + ' Data';
+    </script>
+  </body>
+
+  <!-- Mirrored from kamr.dexignlab.com/xhtml/room.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:36:47 GMT -->
+</html>

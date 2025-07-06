@@ -1,0 +1,149 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+
+<!-- Mirrored from kamr.dexignlab.com/xhtml/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:37:28 GMT -->
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Kamr Hotel Admin Dashboard" />
+	<meta property="og:title" content="Kamr Hotel Admin Dashboard" />
+	<meta property="og:description" content="Kamr Hotel Admin Dashboard" />
+	<meta property="og:image" content="social-image.png" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- PAGE TITLE HERE -->
+	<title>Kamr Hotel Admin Dashboard</title>
+	
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="/static/admin_static/images/favicon.png" />
+	 <link href="/static/admin_static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	 <link href="/static/admin_static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="/static/admin_static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="vh-100" style="background-color: #c5a880;">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+									<div class="text-center mb-3">
+										  
+                                            <div style="transform: scale(1);">
+                                                <svg width="150" height="150" viewBox="0 0 409.99999999999994 100" id="svgElement">
+                                                    <defs id="SvgjsDefs1629">
+                                                        <linearGradient id="SvgjsLinearGradient1636">
+                                                            <stop id="SvgjsStop1637" stop-color="#905e26" offset="0"></stop>
+                                                            <stop id="SvgjsStop1638" stop-color="#f5ec9b" offset="0.5"></stop>
+                                                            <stop id="SvgjsStop1639" stop-color="#905e26" offset="1"></stop>
+                                                        </linearGradient>
+                                                        <linearGradient id="SvgjsLinearGradient1640">
+                                                            <stop id="SvgjsStop1641" stop-color="#905e26" offset="0">
+                                                            </stop><stop id="SvgjsStop1642" stop-color="#f5ec9b" offset="0.5"></stop>
+                                                            <stop id="SvgjsStop1643" stop-color="#905e26" offset="1"></stop>
+                                                        </linearGradient>
+                                                    </defs>
+                                                    <g id="SvgjsG1630" featurekey="symbolContainer" transform="matrix(1,0,0,1,0,0)" fill="url(#SvgjsLinearGradient1636)">    
+                                                        <rect width="110" height="118"></rect>
+                                                    </g>
+                                                    <g id="SvgjsG1631" featurekey="monogramFeature-0" transform="matrix(2.0184544228378485,0,0,2.0184544228378485,16.730105990944605,-19.031142801012933)" fill="#000000">
+                                                        <path d="M19.8 60.6 c-10.98 0 -18.18 -5.58 -18.18 -10.92 c0 -2.52 1.32 -4.26 4.32 -4.26 c6.48 0.06 5.28 11.22 14.28 11.22 c3.48 0 5.7 -1.86 5.7 -4.98 c0 -11.7 -23.52 -4.26 -23.58 -21.84 c0 -7.62 6.36 -12.96 16.26 -12.96 c9.96 0 17.28 5.28 17.22 10.74 c0 2.64 -1.5 4.38 -4.56 4.38 c-7.26 0 -5.4 -11.22 -12.84 -11.22 c-3.78 0 -5.58 2.34 -5.58 5.28 c0 12.84 23.46 5.34 23.46 22.14 c0 7.92 -7.62 12.42 -16.5 12.42 z"></path>
+                                                    </g>
+                                                    <g id="SvgjsG1632" class="brand-title" featurekey="nameFeature-0" transform="matrix(1.8893385758217607,0,0,1.8893385758217607,127.35492491276133,3.234818741662753)" fill="url(#SvgjsLinearGradient1640)">
+                                                        <path d="M11 11.52 c4.36 0 7.56 2.88 8.76 5.88 l-2.52 1.36 c-1.28 -2.56 -3.32 -4.24 -6.24 -4.24 c-3.08 0 -5.2 1.76 -5.2 4.2 c0 2.28 1.44 3.72 4.48 4.88 l2.04 0.76 c5.04 1.88 8.2 4.04 8.2 8.48 c0 4.8 -4.6 7.76 -9.36 7.76 s-8.68 -2.88 -9.76 -6.88 l2.68 -1.28 c0.96 2.96 3.48 5.12 7.08 5.12 c3.2 0 5.92 -1.84 5.92 -4.68 c0 -3.2 -2.24 -4.4 -5.56 -5.68 l-2.08 -0.8 c-4.24 -1.6 -6.96 -3.8 -6.96 -7.76 c0 -4.08 3.6 -7.12 8.52 -7.12 z M31.68 40.32 c-4.04 0 -7.96 -2.6 -7.96 -9.04 l0 -12.08 l3.28 0 l0 12 c0 4.36 2.28 6.24 5.36 6.24 c3.72 0 6.28 -3.44 6.8 -5.96 l0 -12.28 l3.28 0 l0 20.8 l-3.28 0 l0 -4.84 c-0.4 1.44 -2.92 5.16 -7.48 5.16 z M57.76 18.88 c4.04 0 7.96 2.6 7.96 9.04 l0 12.08 l-3.28 0 l0 -12 c0 -4.36 -2.28 -6.24 -5.36 -6.24 c-3.72 0 -6.28 3.44 -6.8 5.96 l0 12.28 l-3.28 0 l0 -20.8 l3.28 0 l0 4.84 c0.4 -1.44 2.92 -5.16 7.48 -5.16 z M105.03999999999999 37 c-2.56 2.2 -5.8 3.4 -9.4 3.4 c-7.28 0 -14.32 -5.92 -14.32 -14.4 s7.04 -14.4 14.32 -14.4 c3.56 0 6.76 1.2 9.28 3.32 l-2.04 2.32 c-1.96 -1.56 -4.48 -2.48 -7 -2.48 c-5.72 0 -11.12 4.64 -11.12 11.24 s5.4 11.24 11.12 11.24 c2.56 0 5.12 -0.96 7.08 -2.56 z M112 11.719999999999999 l0 2.92 l-3.28 0 l0 -2.92 l3.28 0 z M112 19.2 l0 20.8 l-3.28 0 l0 -20.8 l3.28 0 z M126 21.96 l-4.4 0 l0 13.4 c0 1.24 0.48 2 1.68 2 c1.04 0 1.8 -0.24 2.68 -0.64 l0 2.8 c-0.88 0.44 -1.92 0.72 -3.56 0.72 c-2.12 0 -4.04 -0.96 -4.04 -4.6 l0 -13.68 l-2.88 0 l0 -2.76 l2.88 0 l0 -4.88 l3.24 0 l0 4.88 l4.4 0 l0 2.76 z M146.32 19.16 l3.28 0 l-12.64 28.44 l-3.28 0 l3.72 -8.28 l-9 -20.16 l3.28 0 l7.32 16.56 z"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+									
+									</div>
+                                    <h4 class="text-center mb-4">Sign in your account</h4>
+                                    <form action="{% url 'customer_login' %}" method="POST" novalidate>
+                                        {% csrf_token %}
+                                            {% for field in form.visible_fields %}
+                                            <div class="form-group">
+                                                {{ field.label_tag }}
+                                                    {% render_field field class="form-control" %}
+                                                        {% if messages%}
+                                                        {% for message in messages %}
+                                                            <span style="color:red">{{ message }}</span>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                            {% endfor %}
+                                            <div class="mb-3">
+                                               <div class="form-check custom-checkbox ms-0">
+													<input type="checkbox" class="form-check-input" id="basic_checkbox_1">
+													<label class="form-check-label" for="basic_checkbox_1">Remember my preference</label>
+												</div>
+                                            </div>
+                                            <div class="mb-3 mt-1">
+                                                <a href="page-forgot-password.html">Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p class="mb-0 mb-sm-3">Don't have an account? <a class="text-primary" href="{% url 'customer_register' %}">Sign in</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+   <!-- Required vendors -->
+<script src="/static/admin_static/vendor/global/global.min.js"></script>
+<script src="/static/admin_static/vendor/chart.js/Chart.bundle.min.js"></script>
+<script src="/static/admin_static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="/static/admin_static/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="/static/admin_static/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/admin_static/vendor/owl-carousel/owl.carousel.js"></script>
+
+<!-- Swiper-js -->
+<script src="/static/admin_static/vendor/swiper/js/swiper-bundle.min.js"></script>
+
+<!-- Apex Chart -->
+<script src="/static/admin_static/vendor/apexchart/apexchart.js"></script>
+
+<!-- Chart piety plugin files -->
+<script src="/static/admin_static/vendor/peity/jquery.peity.min.js"></script>
+
+<!-- Dashboard 1 -->
+<!-- <script src="/static/admin_static/js/dashboard/dashboard-1.js"></script> -->
+
+<script src="/static/admin_static/js/custom.min.js"></script>
+<script src="/static/admin_static/js/deznav-init.js"></script>
+<script src="/static/admin_static/js/demo.js"></script>
+
+<script>
+    $(function () {
+      $("#datepicker").datepicker({ 
+            autoclose: true, 
+            todayHighlight: true
+      }).datepicker('update', new Date());
+    });
+</script>
+
+</body>
+
+<!-- Mirrored from kamr.dexignlab.com/xhtml/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:37:28 GMT -->
+</html>

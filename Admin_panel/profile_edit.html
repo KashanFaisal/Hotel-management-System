@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html"%}
+<style>
+    #img-preview {
+        display: none;
+        width: 155px;
+        border: 2px dashed #333;  
+        margin-bottom: 20px;
+      }
+      #img-preview img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      [type="file"] {
+        height: 0;  
+        width: 0;
+        overflow: hidden;
+      }
+      [type="file"] + label {
+        font-family: sans-serif;
+        background: #c5a880;
+        padding: 10px 30px;
+        border: 2px solid #c5a880;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      [type="file"] + label:hover {
+        background-color: #e0b87e;
+        color: #fff;
+      }
+      
+      /* -------------------------------------*/
+      body {padding: 15px;}
+      p {position:fixed; bottom:0; font-family: monospace; font-weight: bold; font-size:12px;}
+      p a {color:#000;}
+      .img{
+        margin-right: 80%!important;
+      }
+
+      
+</style>
+
+<body>
+
+    {% include "loader.html" %} 
+	
+	<div id="main-wrapper">
+		{% include "navebar.html" %} 
+		{% include "sidebar.html" %} 
+
+
+      <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" style="content: Sun City Cottages;"><a href="java:void(0)">Form</a></li>
+						<li class="breadcrumb-item "><a href="java:void(0)">New Room </a></li>
+					</ol>
+                </div>
+                <!-- row -->
+                <div class="row" >
+                    <center>
+                    <div class="col-xl-11 col-lg-11">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add New Room</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                <input type="email" name="email" id="email" class="form-control input-default text_box" value="{{employee.user.email}}">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <input type="text" name="name" id="r_price" class="form-control input-default text_box" value="{{employee.user.name}}">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                <input type="text" name="phone_number" id="phone_number" class="form-control input-default text_box" value="{{employee.user.phone_number}}">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <input type="text" name="designation" id="designation" class="form-control input-default text_box" value="{{employee.designation}}">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 d-flex justify-content-between">
+                                            <button type="submit" class="btn btn-primary" style="width: 100%; font-size:18px; font-weight:700" >Submit</button>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        {% include "footer.html"%}        
+</body>
+</html>

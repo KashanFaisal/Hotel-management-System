@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "header.html" %}
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    .button {
+      background-color: #04aa6d;
+      color: white;
+      padding: 10px 15px;
+      margin: 8px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    .button:hover {
+      opacity: 1;
+    }
+
+    /* Float cancel and delete buttons and add an equal width */
+    .cancelbtn,
+    .deletebtn {
+      float: center;
+      width: 20%;
+    }
+
+    /* Add a color to the cancel button */
+    .cancelbtn {
+      background-color: #ccc;
+      color: black;
+    }
+
+    /* Add a color to the delete button */
+    .deletebtn {
+      background-color: #f44336;
+    }
+
+    /* Add padding and center-align text to the container */
+    .container {
+      padding: 16px;
+      text-align: center;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      left: 35%;
+      top: 30%;
+      width: 35%; /* Full width */
+      height: 38%; /* Full height */
+
+      background-color: black;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      border: 1px solid #888;
+      width: 100%;
+      height: 100%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 15px;
+    }
+
+    /* The Modal Close Button (x) */
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 5px;
+      font-size: 35px;
+      font-weight: bold;
+      color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #f44336;
+      cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    /* Change styles for cancel button and delete button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .cancelbtn,
+      .deletebtn {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <body>
+    {% include 'loader.html'%}
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+      {% include "navebar.html" %} {% include "sidebar.html" %}
+
+      <!--**********************************
+            Content body start
+        ***********************************-->
+      <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+          <div
+            class="d-block d-lg-flex align-items-center justify-content-between mb-5"
+          >
+            <div class="coin-tabs">
+              <ul
+                class="nav nav-tabs d-none"
+                id="ListViewTabLink"
+                role="tablist"
+              >
+              </ul>
+            </div>
+            <div
+              class="form-head d-inline-block d-sm-flex align-items-center mt-2 mt-lg-0"
+            >
+              <a
+                href="{% url 'slider_image' %}"
+                class="btn btn-primary ms-sm-3 ms-0 mt-2 mt-sm-0"
+                >Add New Image</a
+              >
+            </div>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="list"
+              aria-labelledby="list-tab"
+            >
+              <div class="tab-content" id="ListViewTabLinkContent">
+                <div
+                  class="tab-pane fade active show"
+                  id="all-status"
+                  aria-labelledby="boxed-all-status-tab"
+                >
+                  <div class="table-responsive card">
+                    <div class="table-responsive">
+                      <table
+                        class="table border-0 display mb-4 dataTablesCard booking-table table-responsive-lg"
+                        id="guestTable-all6"
+                      >
+                        <thead>
+                          <tr>
+                            <th class="bg-none">
+                              <div class="form-check style-3">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="checkAll"
+                                />
+                              </div>
+                            </th>
+                            <th>Image</th>
+                            <th>Action</th>
+                            <!-- <th>Person</th> -->
+                            <!-- <th>Cost</th>
+                            <th>Status</th>
+                            <th>Book Date</th> -->
+                            <th class="bg-none"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for slider in slider %}
+                          <tr>
+                            <td>
+                              <div class="form-check style-3">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="guest-bx">
+                                <img
+                                  class="me-4"
+                                  src="{{slider.image.url}}"
+                                  alt=""
+                                />
+                                <div>
+                                  <span
+                                    class="text-primary fs-16 font-w400 text-nowrap"
+                                    >{{r_data.r_no}}</span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            
+                            <td>
+                                {% if slider.slider_status == 'disable'%}    
+                                <div>
+                                    <a href="/sliderimage_enable/{{slider.id}}">
+                                        <span class="btn btn-success btn-sm">Enable</span>
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if slider.slider_status == 'enable'%}
+                                <div>
+                                    <a href="/sliderimage_enable/{{slider.id}}">
+                                        <span class="btn btn-danger btn-sm">Disable</span>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </td>
+                            
+                            <div id="id01_{{r_data.id}}" class="modal">
+                              <div id="id01" class="container">
+                                <span
+                                  onclick="document.getElementById('id01_{{r_data.id}}').style.display='none'"
+                                  class="close"
+                                  title="Close Modal"
+                                  >×</span
+                                >
+                                <h1>Delete Record</h1>
+                                <p>Are you sure you want to delete?</p>
+                                <div class="clearfix">
+                                  <button
+                                    type="button"
+                                    onclick="document.getElementById('id01_{{r_data.id}}').style.display='none'"
+                                    class="cancelbtn button"
+                                  >
+                                    Cancel
+                                  </button>
+                                  <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button> -->
+                                  <a
+                                    onclick="document.getElementById('id01_{{r_data.id}}').style.display='none'"
+                                    class="deletebtn button"
+                                    href="/room_delete/{{r_data.id}}"
+                                    >Delete</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="boxed" aria-labelledby="boxed-tab">
+              <div class="tab-content" id="BoxedViewTabLinkContent">
+                <div
+                  class="tab-pane fade active show"
+                  id="boxed-all-status"
+                  aria-labelledby="boxed-all-status-tab"
+                >
+                  <div class="row">
+                    {% for r_data in room_data %}
+                    <div class="main-grid">
+                      <div class="grid-info">
+                        <div class="popular-rooms">
+                          <div class="dropdown dropstart">
+                            <a
+                              href="javascript:void(0);"
+                              class="btn-link"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            </a>
+                            <div class="dropdown-menu">
+                              <a
+                                class="dropdown-item"
+                                href="javascript:void(0);"
+                                >Edit</a
+                              >
+                              <a
+                                class="dropdown-item"
+                                href="javascript:void(0);"
+                                >Delete</a
+                              >
+                            </div>
+                          </div>
+                          <img src="{{r_data.room_img.url}}" alt="image" />
+                          <div class="content">
+                            <span class="badge badge-success">AVAILABLE</span>
+                            <h3
+                              class="font-w500 text-white pt-3 pb-2 m-0 text-nowrap"
+                            >
+                              <a href="javascript:void(0);"
+                                >{{r_data.r_cat.rc_name}}</a
+                              >
+                            </h3>
+                            <span class="font-w400 text-white"
+                              >{{r_data.r_no}}</span
+                            >
+                          </div>
+                        </div>
+                        <div class="review-area">
+                          <div class="star-rate">
+                            <h4 class="mb-0 font-w500">3.4</h4>
+                            <ul>
+                              <li><i class="fa-solid fa-star"></i></li>
+                              <li><i class="fa-solid fa-star"></i></li>
+                              <li><i class="fa-solid fa-star"></i></li>
+                            </ul>
+                          </div>
+                          <p class="mb-0 font-w400">{{r_data.r_no}}</p>
+                        </div>
+                        <ul class="feature-list">
+                          <li>Floor <span>G-05</span></li>
+                          <li>Bed Type <span>{{r_data.r_bed_no}}</span></li>
+                          <li>Fecility <span>{{r_data.r_cat.rc_des}}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    {% endfor%}
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-between flex-wrap mt-4"
+                  >
+                    <div class="mb-sm-0 mb-3">
+                      <h5 class="mb-0" id="data-info">
+                        Showing {{ room_data|length }} of {{ total_data }} Data
+                      </h5>
+                    </div>
+                    <nav>
+                      <ul
+                        class="pagination pagination-gutter pagination-primary style-1"
+                      >
+                        <li class="page-item page-indicator job-search-page">
+                          <a class="page-link" href="javascript:void(0)"
+                            >Prev</a
+                          >
+                        </li>
+                        <li class="page-item active">
+                          <a class="page-link" href="javascript:void(0)">1</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)">2</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)">3</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)">4</a>
+                        </li>
+                        <li class="page-item page-indicator job-search-page">
+                          <a class="page-link" href="javascript:void(0)"
+                            >Next</a
+                          >
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--**********************************
+            Content body end
+        ***********************************-->
+
+      <!--**********************************
+            Footer start
+        ***********************************-->
+      <div class="footer">
+        <div class="copyright">
+          <p>
+            Copyright © Designed &amp; Developed by
+            <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2022
+          </p>
+        </div>
+      </div>
+      <!--**********************************
+            Footer end
+        ***********************************-->
+
+      <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+      <!--**********************************
+           Support ticket button end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    {% include "footer.html" %}
+    <script>
+      function assignedDoctor() {
+        /*  testimonial one function by = owl.carousel.js */
+        jQuery(".front-view-slider").owlCarousel({
+          loop: true,
+          margin: 30,
+          nav: true,
+          center: true,
+          autoplaySpeed: 3000,
+          navSpeed: 3000,
+          paginationSpeed: 3000,
+          slideSpeed: 3000,
+          smartSpeed: 3000,
+          autoplay: false,
+          animateOut: "fadeOut",
+          dots: true,
+          navText: ["", ""],
+          responsive: {
+            0: {
+              items: 1,
+            },
+
+            480: {
+              items: 1,
+            },
+
+            767: {
+              items: 5,
+            },
+            1400: {
+              items: 5,
+            },
+            1750: {
+              items: 5,
+            },
+          },
+        });
+      }
+
+      jQuery(window).on("load", function () {
+        setTimeout(function () {
+          assignedDoctor();
+        }, 1000);
+      });
+    </script>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("id01");
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+    <script>
+      // Replace these values with your actual data
+      var totalData = {{ total_records }};
+      var displayedData = {{ room_data|length }};
+
+      // Update the text dynamically
+      document.getElementById('data-info').innerText = 'Showing ' + displayedData + ' of ' + totalData + ' Data';
+    </script>
+  </body>
+
+  <!-- Mirrored from kamr.dexignlab.com/xhtml/room.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Feb 2024 18:36:47 GMT -->
+</html>

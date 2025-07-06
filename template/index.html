@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'user_header.html'%}
+<!-- Mirrored from preview.colorlib.com/theme/unwind/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 18:03:31 GMT -->
+<body>
+{% include 'user_navebar.html'%}
+
+
+
+<section class="hero-wrap" style="background-image: url('/static/images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
+      <div class="carousel-inner">
+          {% for slider in slider %}
+          <!-- First slide -->
+          <div class="carousel-item{% if forloop.first %} active{% endif %} hero-wrap"
+              style="background-image: url('{{slider.image.url}}');">
+              <div class="overlay"></div>
+              <div class="container">
+                  <div class="row no-gutters slider-text align-items-center justify-content-center">
+                      <div class="col-lg-10 text-center">
+                          <span class="subheading">Enjoy Your Wonderful Holidays With A Great Luxury Experience!</span>
+                          <h1 class="mb-4">Most Relaxing Place</h1>
+                          <p><a href="{% url 'room' %}" class="btn btn-primary p-4 py-3">Take A Tour <span
+                                      class="ion-ios-arrow-round-forward"></span></a> <a href="#"
+                                  class="btn btn-white btn-outline-white p-4 py-3">Learn More <span
+                                      class="ion-ios-arrow-round-forward"></span></a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+
+      <!-- Controls -->
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+      </a>
+  </div>  
+  </div>
+</section>
+
+
+<section class="ftco-section ftco-no-pb ftco-no-pt ftco-booking">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="CheckForm" method="POST" action="{% url 'room_check' %}" class="booking-form">
+                    {% csrf_token %}
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg form-wrap d-flex py-3 py-lg-5 px-4">
+                            <div class="form-group ps-4 border-0">
+                                <label for="#">Check-In</label>
+                                <div class="form-field">
+                                    <div class="icon"><span class="fa fa-calendar"></span></div>
+                                    <input type="text" class="form-control " name="check_in_date" placeholder="Check-In Date" id="mdate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg form-wrap d-flex py-3 py-lg-5 px-4">
+                            <div class="form-group ps-4">
+                                <label for="#">Check-Out</label>
+                                <div class="form-field">
+                                    <div class="icon"><span class="fa fa-calendar"></span></div>
+                                    <input type="text" class="form-control " name="check_out_date" placeholder="Check-Out Date" id="mdates">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg form-wrap d-flex py-3 py-lg-5 px-4">
+                            <div class="form-group ps-4">
+                                <label for="#">Room</label>
+                                <div class="form-field">
+                                    <div class="select-wrap" >
+                                        <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                        <select name ="r_cat"id class="form-control" > 
+                                        <option value>Choose Option ...</option>
+                                        {% for cat in rc%}
+                                        <option value="{{cat.id}}">{{cat.rc_name}}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg form-wrap d-flex py-3 py-lg-5 px-4">
+                            <div class="form-group ps-4">
+                                <label for="#">Guests</label>
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                        <select name="r_capacity" id class="form-control">
+                                        <option >Choose Option ...</option>
+                                        <option value="1">1 Person</option>
+                                        <option value="2">2 Person</option>
+                                        <option value="3">3 Person</option>
+                                        <option value="4">4 Person</option>
+                                        <option value="5">5 Person</option>
+                                        <option value="6">6-9 Person</option>
+                                        <option value="10">10+ Person</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg d-flex">
+                            <div class="form-group d-flex border-0">
+                                <div class="form-field w-100 align-items-center d-flex">
+                                    <button class="d-flex justify-content-center align-items-center align-self-stretch form-control btn btn-primary py-lg-4 py-xl-0"><span>Check Availability</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </section>
+{% include 'user_about_section.html'%}
+{% include 'user_hotel_service.html'%}
+{% include 'intro_page.html'%}
+
+<section class="ftco-section bg-light">
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-md-8 heading-section text-center mb-5" data-aos="fade-up" data-aos-duration="1000">
+                <span class="subheading">Our Rooms</span>
+                <h2 class="mb-4">Featured Rooms</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% for rooms in room %}
+            {% if rooms.id|divisibleby:2 %}
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="flip-left" data-aos-delay="100" data-aos-duration="1000">
+                <div class="room-wrap d-md-flex flex-md-column-reverse">
+                    <a href="/sig_room/{{rooms.id}}" class="img img-room" style="background-image: url({{rooms.room_img.url}});">
+                    </a>
+                    <div class="text p-5 text-center">
+                        <h3><a href="/sig_room/{{rooms.id}}">{{rooms.r_cat.rc_name}}</a></h3>
+                        <p>{{rooms.r_cat.rc_des}}</p>
+                        <p class="mb-0 mt-2"><span class="me-3 price">{{rooms.r_price}} <small>/ night</small></span><a href="/reservation/{{rooms.id}}" class="btn-custom">Book Now</a></p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="flip-left" data-aos-delay="100" data-aos-duration="1000">
+                <div class="room-wrap">
+                    <a href="/sig_room/{{rooms.id}}" class="img img-room" style="background-image: url({{rooms.room_img.url}});">
+                    </a>
+                    <div class="text p-5 text-center">
+                        <h3><a href="/sig_room/{{rooms.id}}">{{rooms.r_cat.rc_name}}</a></h3>
+                        <p>{{rooms.r_cat.rc_des}}</p>
+                        <p class="mb-0 mt-2"><span class="me-3 price">{{rooms.r_price}} <small>/ night</small></span><a href="/reservation/{{rooms.id}}" class="btn-custom">Book Now</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="img vid-section" style="background-image: url(/static/images/bg_2.jpg);">
+<div class="overlay"></div>
+<div class="container-xl">
+<div class="row justify-content-center">
+<div class="col-md-10 vid-height d-flex align-items-center justify-content-center text-center">
+<div class="video-wrap" data-aos="fade-up">
+<span class="subheading">Watch our luxurious hotel</span>
+<h3>Take A Tour</h3>
+<a href="https://vimeo.com/115041822" class="video-icon glightbox d-flex align-items-center justify-content-center">
+<span class="ion-ios-play"></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<br>
+<section class="ftco-section-counter">
+    <div class="container">
+    <div class="row section-counter">
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+    <div class="counter-wrap">
+    <span class="number"><span class="countup">{{feedback_total}}</span></span>
+    <span class="caption"># of Happy Guests</span>
+    </div>
+    </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="counter-wrap">
+    <span class="number"><span class="countup">{{room_total}}</span></span>
+    <span class="caption"># of Rooms</span>
+    </div>
+    </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+    <div class="counter-wrap">
+    <span class="number"><span class="countup">{{reserve_total}}</span></span>
+    <span class="caption"># of Reservation</span>
+    </div>
+    </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+    <div class="counter-wrap">
+    <span class="number"><span class="countup">587</span></span>
+    <span class="caption"># of Destination</span>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+    </div>
+    </div>
+    </section>
+<section class="ftco-section testimony-section bg-light">
+    <div class="container-xl">
+        <div class="row justify-content-center pb-4">
+            <div class="col-md-7 text-center heading-section" data-aos="fade-up" data-aos-duration="1000">
+            <span class="subheading">Testimonial</span>
+            <h2 class="mb-3">Happy Guests</h2>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="carousel-testimony">
+                        {% for feedback in feedback%}
+                            <div class="item">
+                                <div class="testimony-wrap">
+                                    <div class="text">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div class="user-img" style="background-image: url(/static/images/person_1.jpg)">
+                                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></div>
+                                            </div>
+                                            <div class="ps-3 tx">
+                                                <p class="name">{{feedback.username}}</p>
+                                                <span class="position">{{feedback.r_id.r_cat.rc_name}}</span>
+                                                
+                                            </div>
+                                        </div>
+                                        <p class="mb-4 msg">{{feedback.message}}</p>
+                                        {% if feedback.rating == '5star'%}
+                                        <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></p>
+                                        {% elif feedback.rating == '4star'%}
+                                        <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span></p>
+                                        {% elif feedback.rating == '3star'%}
+                                        <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></p>
+                                        {% elif feedback.rating == '2star'%}
+                                        <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></p>
+                                        {% elif feedback.rating == '1star'%}
+                                        <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% include 'user_footer.html'%}
+<script>
+    $(document).ready(function() {
+      
+      // Function to submit feedback (you can implement this as needed)
+      window.submitFeedback = function () {
+          // This assumes you have a form with an id="feedbackForm"
+          document.getElementById('CheckForm').submit();
+      };
+      
+  });
+  
+</script>
+<script>
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        const carousel = document.getElementById('carouselExampleIndicators');
+        const totalSlides = document.querySelectorAll('.carousel-item').length;
+        const slideWidth = document.querySelector('.carousel-item').offsetWidth;
+    
+        if (index < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (index >= totalSlides) {
+            currentIndex = 0;
+        } else {
+            currentIndex = index;
+        }
+    
+        carousel.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+    }
+    
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+    
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+    
+    // Optionally, you can add automatic slide change
+    // setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    
+</script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/unwind/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 18:03:55 GMT -->
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html"%}
+
+<body>
+
+    {% include "loader.html" %}
+
+    <div id="main-wrapper">
+        {% include "navebar.html" %}
+        {% include "sidebar.html" %}
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" style="content: Sun City Cottages;"><a
+                                href="java:void(0)">Form</a></li>
+                        <li class="breadcrumb-item"><a href="java:void(0)">Room Category</a></li>
+                    </ol>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <center>
+                        <div class="col-xl-11 col-lg-11">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Add Room Category</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="basic-form">
+                                        <form method="POST" action="{% url 'Roomcat_edit' rc_edit.id %}">
+                                            {% csrf_token %}
+                                            <div class="mb-3">
+                                                <input type="text" name="rc_name" id="rc_name"
+                                                    class="form-control input-default text_box"
+                                                    value="{{rc_edit.rc_name}}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="text" name="rc_des" id="rc_des"
+                                                    class="form-control input-default text_box"
+                                                    value="{{rc_edit.rc_des}}">
+                                            </div>
+                                            <!-- <div class="mb-3">
+                                            <textarea class="form-control text_box" name="rc_des" rows="4" id="rc_des" value="{{rc_edit.rc_name}}" required></textarea>
+                                        </div> -->
+                                            <div class="mb-3 d-flex justify-content-between">
+                                                <button type="submit" class="btn btn-primary"
+                                                    style="width: 100%; font-size:16px; font-weight:700">Submit</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        {% include "footer.html"%}
+
+</body>
+
+</html>

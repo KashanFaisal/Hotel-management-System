@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'user_header.html'%}
+
+  <header>
+    <link href="/static/admin_static/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Clockpicker -->
+    <link href="/static/admin_static/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <!-- asColorpicker -->
+    <link href="/static/admin_static/vendor/jquery-asColorPicker/css/asColorPicker.min.css" rel="stylesheet">
+    <!-- Material color picker -->
+    <link href="/static/admin_static/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+  </header>
+  <body>
+    {% include 'user_navebar.html'%} 
+    {% include 'user_slider.html'%}
+    
+
+    {% block content %}
+
+    {% if error_message %}
+      <script>
+        // Display an alert with the error message
+        alert("{{ error_message }}");
+      </script>
+    {% endif %}
+    {% endblock %}
+    <section class="ftco-section ftco-room-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 blog-single">
+                    <div class="carousel-room">
+                        <div class="item">
+                        <div class="room-detail img" style="background-image: url({{room.room_img.url}})">
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-lg-4 sidebar ps-md-4">
+                  <div class="sidebar-box bg-light rounded">
+                    <h2>Luxury Room</h2>
+                    <div class="row no-gutters justify-content-center">
+                    <div class="col-md-12">
+                      <div class="wrapper">
+                        <div class="row g-0">
+                            <div class="col-lg-12" >
+                              <div class="contact-wrap w-100 p-md-5 p-4">
+                                <form method="POST" >
+                                  {% csrf_token %}
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <input type="text" class="form-control col-xl-3 col-xxl-6 col-md-12 mb-3"
+                                          name="username"
+                                          id="name"
+                                          value="{{request.session.user_name}}"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <input
+                                          hidden
+                                          type="text"
+                                          class="form-control"
+                                          name="r_id"
+                                          id=""
+                                          value="{{room.id}}"
+                                        />
+                                        <input
+                                          type="text"
+                                          class="form-control col-xl-3 col-xxl-6 col-md-12 mb-3"
+                                          name=""
+                                          id=""
+                                          value="{{room.r_no}}"
+                                        />
+                                        <input hidden type="text" class="form-control" name="res_status" id="" value="Disabled"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-06">
+                                      <div class="form-group">
+                                        <input
+                                          type="text"
+                                          class="form-control col-xl-3 col-xxl-6 col-md-12 mb-3"
+                                          name=""
+                                          id="subject"
+                                          value="{{room.r_price}}&nbsp;RS,&nbsp;Per Day"/>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <div class="row form-material">
+                                        <div class="col-xl-3 col-xxl-6 col-md-12 mb-3">
+                                            
+                                            <input type="text" class="form-control" name="check_in_date" placeholder="2017-06-04" id="mdate">
+                                        </div>
+                                      </div>
+                                      <div class="row form-material">
+                                        <div class="col-xl-3 col-xxl-6 col-md-12 mb-3">
+                                            <input type="text" class="form-control" name="check_out_date" placeholder="2017-06-04" id="mdates">
+                                        </div>
+                                      </div> 
+                                    </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <input type="submit" value="Send Message" class="btn btn-primary"/>
+                                        <div class="submitting"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'user_footer.html'%}
+  
+      <!-- Daterangepicker -->
+      <!-- momment js is must -->
+      <script src="/static/admin_static/vendor/moment/moment.min.js"></script>
+      <script src="/static/admin_static/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+      <!-- Material color picker -->
+      <script src="/static/admin_static/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+      <!-- Material color picker init -->
+      <script src="/static/admin_static/js/plugins-init/material-date-picker-init.js"></script>
+      <!-- Pickdate -->
+      <script src="/static/admin_static/js/plugins-init/pickadate-init.js"></script>
+    
+
+
+    <!-- <script>
+      $(function () {
+        $("#datepicker").datepicker({
+          dateFormat: "dd-mm-yy", // Set the desired date format
+          changeMonth: true,
+          changeYear: true,
+          yearRange: "1900:+nn", // Set the range of years
+        });
+      });
+    </script> -->
+    
+  </body>
+</html>

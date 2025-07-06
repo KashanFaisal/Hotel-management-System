@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'user_header.html'%}
+<body>
+  {% include 'user_navebar.html'%}
+  <section class="hero-wrap" style="background-image: url('/static/images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
+      <div class="carousel-inner">
+          {% for slider in slider %}
+          <!-- First slide -->
+          <div class="carousel-item{% if forloop.first %} active{% endif %} hero-wrap"
+              style="background-image: url('{{slider.image.url}}');">
+              <div class="overlay"></div>
+              <div class="container">
+                  <div class="row no-gutters slider-text align-items-center justify-content-center">
+                      <div class="col-lg-10 text-center">
+                        <p class="breadcrumbs"><span class="me-2"><a href="{% url 'home'%}">Home <i class="fa fa-chevron-right"></i></a></span> <span>About <i class="fa fa-chevron-right"></i></span></p>
+                          <h1 class="mb-4">About Us</h1>
+                          <p><a href="#" class="btn btn-primary p-4 py-3">Take A Tour <span
+                                      class="ion-ios-arrow-round-forward"></span></a> <a href="#"
+                                  class="btn btn-white btn-outline-white p-4 py-3">Learn More <span
+                                      class="ion-ios-arrow-round-forward"></span></a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+
+      <!-- Controls -->
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+      </a>
+  </div>  
+  </div>
+</section>
+
+{% include 'user_about_section.html'%}
+{% include 'user_hotel_service.html'%}
+{% include 'intro_page.html'%}
+
+  
+<section class="img vid-section" style="background-image: url(/static/images/bg_2.jpg);">
+<div class="overlay"></div>
+<div class="container-xl">
+<div class="row justify-content-center">
+<div class="col-md-10 vid-height d-flex align-items-center justify-content-center text-center">
+<div class="video-wrap" data-aos="fade-up">
+<span class="subheading">Watch our luxurious hotel</span>
+<h3>Take A Tour</h3>
+<a href="https://vimeo.com/115041822" class="video-icon glightbox d-flex align-items-center justify-content-center">
+<span class="ion-ios-play"></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="ftco-section testimony-section bg-light">
+  <div class="container-xl">
+      <div class="row justify-content-center pb-4">
+          <div class="col-md-7 text-center heading-section" data-aos="fade-up" data-aos-duration="1000">
+          <span class="subheading">Testimonial</span>
+          <h2 class="mb-3">Happy Guests</h2>
+          </div>
+      </div>
+      <div class="row">
+              <div class="col-md-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                  <div class="carousel-testimony">
+                      {% for feedback in feedback%}
+                          <div class="item">
+                              <div class="testimony-wrap">
+                                  <div class="text">
+                                      <div class="d-flex align-items-center mb-4">
+                                          <div class="user-img" style="background-image: url(/static/images/person_1.jpg)">
+                                              <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></div>
+                                          </div>
+                                          <div class="ps-3 tx">
+                                              <p class="name">{{feedback.username}}</p>
+                                              <span class="position">{{feedback.r_id.r_cat.rc_name}}</span>
+                                              
+                                          </div>
+                                      </div>
+                                      <p class="mb-4 msg">{{feedback.message}}</p>
+                                      {% if feedback.rating == '5star'%}
+                                      <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></p>
+                                      {% elif feedback.rating == '4star'%}
+                                      <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span></p>
+                                      {% elif feedback.rating == '3star'%}
+                                      <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></p>
+                                      {% elif feedback.rating == '2star'%}
+                                      <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></p>
+                                      {% elif feedback.rating == '1star'%}
+                                      <p class="rate"><span><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></p>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                      {% endfor %}
+                  </div>
+              </div>
+      </div>
+  </div>
+</section>
+
+{% include 'user_footer.html'%}
+<script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+          </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"8588aac358c521ec","b":1,"version":"2024.2.1","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/unwind/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 18:03:57 GMT -->
+</html>

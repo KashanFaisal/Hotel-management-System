@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html"%}
+<style>
+    .pad{
+        padding-bottom: 2%;
+    }
+</style>
+
+<body>
+
+    {% include "loader.html" %} 
+	
+	<div id="main-wrapper">
+		{% include "navebar.html" %} 
+		{% include "sidebar.html" %} 
+        
+      <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" style="content: Sun City Cottages;"><a href="java:void(0)">Form</a></li>
+						<li class="breadcrumb-item"><a href="java:void(0)">Profile</a></li>
+					</ol>
+                </div>
+                <!-- row -->
+                <div class="row" >
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Profile</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-md-12 d-flex justify-content-between">
+                                    <!-- Column 1 Content -->
+                                        <a href="/profile_edit/{{user.username}}" style="margin-left: auto;"><h4 class="btn btn-primary">Edit</h4></a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <!-- Column 1 Content -->
+                                            <h3>UserName :</h3>
+                                    </div>
+                                    <div class="col-md-3 pad" >
+                                        <!-- Column 1 Content -->
+                                            <h3>{{user.username}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <!-- Column 1 Content -->
+                                            <h3>Name :</h3>
+                                    </div>
+                                    <div class="col-md-3 pad">
+                                        <!-- Column 1 Content -->
+                                            <h3>{{user.name}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <!-- Column 1 Content -->
+                                            <h3>Email :</h3>
+                                    </div>
+                                    <div class="col-md-4 pad">
+                                        <!-- Column 1 Content -->
+                                            <h3>{{user.email}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <!-- Column 1 Content -->
+                                            <h3>Phone # :</h3>
+                                    </div>
+                                    <div class="col-md-3 pad">
+                                        <!-- Column 1 Content -->
+                                            <h3>{{user.phone_number}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <!-- Column 1 Content -->
+                                            <h3>Designation :</h3>
+                                    </div>
+                                    <div class="col-md-3 pad">
+                                        <!-- Column 1 Content -->
+                                            <h3>{{employee.designation}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        {% include "footer.html" %}
+        
+</body>
+</html>
